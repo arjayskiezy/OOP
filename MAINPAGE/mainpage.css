@@ -1,0 +1,113 @@
+body {
+        background-color: #f8f1e9;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 90%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .nav-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 2px solid #e0c7a4;
+        margin-bottom: 20px;
+    }
+    .nav-bar p {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+    }
+    .logout-btn {
+        background-color: #b08968;
+        color: #fff;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .logout-btn:hover {
+        background-color: #8f654a;
+    }
+    h1 {
+        font-family: 'Playfair Display', serif;
+        text-align: center;
+        color: #8a5a44;
+        margin-bottom: 10px;
+    }
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    .product-item {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 15px;
+    }
+    .product-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+    .product-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 18px;
+        color: #4a3b30;
+        margin: 10px 0;
+    }
+    .product-price {
+        color: #b08968;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .add-cart-button {
+        display: inline-block;
+        margin-top: 10px;
+        background-color: #b08968;
+        color: #fff;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    .add-cart-button:hover {
+        background-color: #8f654a;
+    }
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .product-item {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    
+    .add-cart-button {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 16px;
+        background-color: #a67c52; /* Adjust as needed */
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    

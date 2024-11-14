@@ -1,0 +1,39 @@
+/* Custom styles to override Tailwind */
+body {
+    background-color: #f8f1e9;
+    font-family: 'Roboto', sans-serif;
+}
+.custom-h1 {
+    font-family: 'Playfair Display', serif;
+    color: #8a5a44;
+}
+.custom-button {
+    background-color: #b08968;
+    color: #fff;
+    border-radius: 5px;
+}
+.custom-button .add {
+    background-color: #b08968;
+    color: #fff;
+    border-radius: 5px;
+    position: fixed;
+}
+.custom-button:hover {
+    background-color: #8f654a;
+}
+.product-name {
+    font-family: 'Playfair Display', serif;
+    color: #4a3b30;
+}
+.product-price {
+    color: #b08968;
+}
+
+.container {
+    max-width: 100%; /* Ensure the container doesn't exceed the page width */
+}
+
+.product-card {
+    margin: 0 auto; /* Center the card */
+    max-width: 100%; /* Make sure the card doesn't exceed its parent width */
+}

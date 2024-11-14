@@ -63,32 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Create Account</title>
     <link rel="stylesheet" href="register.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>
-        function validateForm() {
-            const firstName = document.forms["registerForm"]["first_name"].value.trim();
-            const lastName = document.forms["registerForm"]["last_name"].value.trim();
-            const email = document.forms["registerForm"]["email"].value.trim();
-            const phoneNumber = document.forms["registerForm"]["phoneNumber"].value.trim();
-            const password = document.forms["registerForm"]["password"].value.trim();
-            let errorMessage = "";
-
-            if (!firstName || !lastName || !email || !phoneNumber || !password) {
-                errorMessage = "All fields are required.";
-            } else if (!/^\+63\d{10}$/.test(phoneNumber)) {
-                errorMessage = "Invalid phone number format. Use +63 followed by 10 digits.";
-            } else if (!/\S+@\S+\.\S+/.test(email)) {
-                errorMessage = "Invalid email format.";
-            } else if (password.length < 6) {
-                errorMessage = "Password must be at least 6 characters long.";
-            }
-
-            if (errorMessage) {
-                document.getElementById("error-message").innerText = errorMessage;
-                return false;
-            }
-            return true;
-        }
-    </script>
 </head>
 
 <body>

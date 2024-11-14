@@ -9,6 +9,8 @@ if (!$conn) {
     die("Database connection failed.");
 }
 
+$error = ""; // Initialize the error message variable
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $conn->real_escape_string($_POST['email']);
     $password = $_POST['password'];
@@ -33,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $error = "Invalid password. Please try again.";
         }
+    } else {
+        $error = "No account found with that email.";
     }
 }
 ?>
@@ -54,9 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="login-container">
             <h1> Login </h1>
-            <?php if (isset($error)) {
-                echo "<p>$error</p>";
-            } ?>
+            <?php if (!empty($error)) { ?>
+                <p style="color: red;"><?php echo $error; ?></p>
+            <?php } ?>
             <form action="login.php" method="POST">
                 <div class="input-group">
                     <span class="icon"><i class="fas fa-user"></i></span>

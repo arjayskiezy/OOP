@@ -16,21 +16,22 @@ $products = $productObj->getAllProducts();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shiffy Vintage Clothing</title>
+    <link rel="icon" href="../Logo.ico" />
     <link rel="stylesheet" href="mainpage.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <link href="mainpage.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <div class="nav-bar">
             <p><strong>Welcome, <?php echo ucwords(htmlspecialchars($_SESSION['customer_name'])); ?>!</strong></p>
-            <form action="../LOGIN/login.php" method="POST">
-                <button type="submit" class="logout-btn">Logout</button>
-            </form>
+            <button type="button" class="logout-btn" onclick="window.location.href='../LOGIN/login.php';">Logout</button>
         </div>
         <h1>New Arrivals</h1>
         <div class="product-grid">
@@ -51,4 +52,5 @@ $products = $productObj->getAllProducts();
         </div>
     </div>
 </body>
+
 </html>

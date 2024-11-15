@@ -99,6 +99,7 @@ $products = $productObj->getAllProducts();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Manage Products</title>
+    <link rel="icon" href="../Logo.ico" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="adminpage.css" rel="stylesheet">
 </head>
@@ -108,7 +109,7 @@ $products = $productObj->getAllProducts();
         <!-- Header section -->
         <div class="flex justify-between items-center border-b-2 border-yellow-400 pb-2 mb-4">
             <p class="text-2xl font-bold custom-h1">ADMIN</p>
-            <button type="button" class="px-4 py-2 custom-button" onclick="window.location.href='../LOGIN/login.php';">Logout</button>
+            <button type="button" class="px-4 py-2 custom-button" onclick="window.location.href='../LOGIN/login.php';"><strong> Logout</strong></button>
         </div>
 
         <!-- Main content title -->
@@ -147,8 +148,8 @@ $products = $productObj->getAllProducts();
                             <div class='text-xl font-semibold mt-2 product-name'>" . htmlspecialchars($product['product_name']) . "</div>
                             <div class='text-lg product-price font-bold'>₱" . number_format($product['price'], 2) . "</div>
                             <div class='flex justify-between mt-4'>
-                                <button onclick='openForm(\"update\", {$productData})' class='bg-green-500 text-white px-2 py-1 rounded'>Update</button>
-                                <button onclick='deleteProduct(" . $product['product_id'] . ")' class='bg-red-500 text-white px-2 py-1 rounded'>Delete</button>
+                                <button onclick='openForm(\"update\", {$productData})' style='background-color: #b08968;box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'class='bg-green-500 text-white px-2 py-1 rounded'>Update</button>
+                                <button onclick='deleteProduct(" . $product['product_id'] . ")' style='background-color: white; color: #b08968;box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'class='px-2 py-1 rounded'>Delete</button>
                             </div>
                         </div>";
                     }

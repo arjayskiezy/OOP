@@ -22,7 +22,7 @@ class Product
     public function getAllProducts()
     {
         $products = []; // Initialize an empty array to hold product data
-        $sql = "SELECT product_id, product_name, category, description, price, stock_quantity, image_url FROM Products"; // SQL query to fetch product details
+        $sql = "SELECT product_id, product_name, category, description, price, stock_quantity, image_url, supplier FROM Products"; // SQL query to fetch product details
         $result = $this->conn->query($sql); // Execute the query
 
         // Check if there are results and if there are rows
@@ -36,13 +36,13 @@ class Product
     }
 
     // Method to add a new product
-    public function addProduct($product_name, $category, $description, $price, $stock_quantity, $status, $image_url)
+    public function addProduct($product_name, $category, $description, $price, $stock_quantity, $status, $image_url, $supplier)
     {
         // SQL query to insert a new product into the database
-        $sql = "INSERT INTO Products (product_name, category, description, price, stock_quantity, status, image_url)
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO Products (product_name, category, description, price, stock_quantity, status, image_url, supplier)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql); // Prepare the SQL statement
-        $stmt->bind_param("sssdiss", $product_name, $category, $description, $price, $stock_quantity, $status, $image_url); // Bind parameters
+        $stmt->bind_param("sssdisss", $product_name, $category, $description, $price, $stock_quantity, $status, $image_url, $supplier); // Bind parameters
 
         // Execute the statement and check if it was successful
         if ($stmt->execute()) {
@@ -69,14 +69,14 @@ class Product
     }
 
     // Method to update an existing product by ID
-    public function updateProduct($product_id, $product_name, $category, $description, $price, $stock_quantity, $status, $image_url = null)
+    public function updateProduct($product_id, $product_name, $category, $description, $price, $stock_quantity, $status, $image_url, $supplier = null)
     {
         // SQL query to update product details; uses COALESCE to keep the original image_url if a new one isn't provided
         $sql = "UPDATE Products 
-                SET product_name = ?, category = ?, description = ?, price = ?, stock_quantity = ?, status = ?, image_url = COALESCE(?, image_url)
+                SET product_name = ?, category = ?, description = ?, price = ?, stock_quantity = ?, status = ?, image_url = COALESCE(?, image_url), supplier = ?
                 WHERE product_id = ?";
         $stmt = $this->conn->prepare($sql); // Prepare the SQL statement
-        $stmt->bind_param("sssdissi", $product_name, $category, $description, $price, $stock_quantity, $status, $image_url, $product_id); // Bind parameters
+        $stmt->bind_param("sssdisssi", $product_name, $category, $description, $price, $stock_quantity, $status, $image_url, $supplier, $product_id); // Bind parameters
 
         // Execute the statement and check if it was successful
         if ($stmt->execute()) {

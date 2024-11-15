@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stock_quantity = intval($_POST['stock_quantity']); // Convert stock input to an integer
     $status = htmlspecialchars($_POST['status']);
     $image_url = null; // Initialize image URL variable
+    $supplier = htmlspecialchars($_POST['supplier']);
 
     // Handle file upload for the product image
     if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] == 0) {
@@ -50,11 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Check if this is an update request
         if (isset($_POST['update_product_id']) && !empty($_POST['update_product_id'])) {
             $product_id = intval($_POST['update_product_id']); // Convert product ID to integer
-            $result = $productObj->updateProduct($product_id, $product_name, $category, $description, $price, $stock_quantity, $status, $image_url);
+            $result = $productObj->updateProduct($product_id, $product_name, $category, $description, $price, $stock_quantity, $status, $image_url, $supplier);
             $_SESSION['success_message'] = $result ? "Product updated successfully." : "Failed to update the product.";
         } else {
             // Handle add request if no update ID is provided
-            $result = $productObj->addProduct($product_name, $category, $description, $price, $stock_quantity, $status, $image_url);
+            $result = $productObj->addProduct($product_name, $category, $description, $price, $stock_quantity, $status, $image_url, $supplier);
             $_SESSION['success_message'] = $result ? "Product added successfully." : "Failed to add the product.";
         }
 
@@ -107,10 +108,14 @@ $products = $productObj->getAllProducts();
 <body>
     <div class="container mx-auto p-6">
         <!-- Header section -->
-        <div class="flex justify-between items-center border-b-2 border-yellow-400 pb-2 mb-4">
+        <div class="flex justify-between items-center space-x-4 border-b-2 border-yellow-400 pb-2 mb-4">
             <p class="text-2xl font-bold custom-h1">ADMIN</p>
-            <button type="button" class="px-4 py-2 custom-button" onclick="window.location.href='../LOGIN/login.php';"><strong> Logout</strong></button>
+            <div class="flex space-x-4">
+                <button type="button" class="px-4 py-2 custom-button" onclick="window.location.href='../LOGIN/login.php';"><strong> Logout</strong></button>
+                <button type="button" class="px-4 py-2 custom-button" onclick="window.location.href='userAccount.php';"><strong> Users</strong></button>
+            </div>
         </div>
+
 
         <!-- Main content title -->
         <h1 class="text-3xl font-bold mb-6 text-center custom-h1">Manage Products</h1>
@@ -200,6 +205,10 @@ $products = $productObj->getAllProducts();
                     <label class="block text-gray-700">Product Image</label>
                     <input type="file" name="product_image" id="product_image" class="w-full border border-gray-300 p-2 rounded" accept="image/*">
                 </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Supplier</label>
+                    <input type="text" name="supplier" id="supplier" class="w-full border border-gray-300 p-2 rounded" required>
+                </div>
                 <!-- Form buttons -->
                 <div class="flex justify-end">
                     <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded mr-2" onclick="closeForm()">Cancel</button>
@@ -247,6 +256,7 @@ $products = $productObj->getAllProducts();
                 document.getElementById('price').value = product.price;
                 document.getElementById('stock_quantity').value = product.stock_quantity;
                 document.getElementById('status').value = product.status;
+                document.getElementById('supplier').value = product.supplier;
             }
 
             // Display the modal

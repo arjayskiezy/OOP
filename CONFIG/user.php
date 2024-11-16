@@ -55,4 +55,18 @@ class UserManager
                         return false;
                 }
         }
+
+        // Function to add a new user
+        public function addUser($firstName, $lastName, $email, $password)
+        {
+                $query = "INSERT INTO Customers (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+                $stmt = $this->db->prepare($query);
+                $stmt->bind_param("ssss", $firstName, $lastName, $email, $password);
+
+                if ($stmt->execute()) {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
 }

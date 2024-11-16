@@ -169,7 +169,7 @@ $products = $productObj->getAllProducts();
 
     <!-- Modal for Add/Update Product Form -->
     <div id="productFormModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden justify-center items-center">
-        <div class="bg-white p-6 rounded shadow-lg w-96">
+        <div class="bg-white p-6 rounded shadow-lg w-90 max-h-screen overflow-y-auto">
             <h2 id="formModalTitle" class="text-2xl font-bold mb-4 custom-h1">Add New Product</h2>
             <form id="productForm" action="adminpage.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="update_product_id" id="update_product_id"> <!-- Hidden field for product ID -->

@@ -18,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $result = $userManager->updateUser($userId, $firstName, $lastName, $email, $password);
                         $_SESSION['success_message'] = $result ? "User updated successfully." : "Failed to update the user.";
                 } else {
-                        $_SESSION['error_message'] = "Invalid update request.";
+                        $result = $userManager->addUser($firstName, $lastName, $email, $password);
+                        $_SESSION['success_message'] = $result ? "User added successfully." : "Failed to add the user.";
                 }
 
                 header('Location: userAccount.php');

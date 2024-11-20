@@ -10,15 +10,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $firstName = htmlspecialchars($_POST['first_name']);
         $lastName = htmlspecialchars($_POST['last_name']);
         $email = htmlspecialchars($_POST['email']);
+        $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash the password
 
         try {
                 // Check if this is an update request
                 if (isset($_POST['update_user_id']) && !empty($_POST['update_user_id'])) {
-                        $result = $userManager->updateUser($userId, $firstName, $lastName, $email, $password);
+                        $result = $userManager->updateUser($userId, $firstName, $lastName, $email, $phoneNumber , $password);
                         $_SESSION['success_message'] = $result ? "User updated successfully." : "Failed to update the user.";
                 } else {
-                        $result = $userManager->addUser($firstName, $lastName, $email, $password);
+                        $result = $userManager->addUser($firstName, $lastName, $email, $phoneNumber ,$password);
                         $_SESSION['success_message'] = $result ? "User added successfully." : "Failed to add the user.";
                 }
 
@@ -152,8 +153,12 @@ $users = $userManager->fetchUsers();
                                         <input type="email" name="email" id="email" class="w-full border border-gray-300 p-2 rounded" required>
                                 </div>
                                 <div class="mb-4">
+                                        <label class="block text-gray-700">Phone</label>
+                                        <input type="text" name="phoneNumber" id="phoneNumber" class="w-full border border-gray-300 p-2 rounded" required>
+                                </div>
+                                <div class="mb-4">
                                         <label class="block text-gray-700">Password</label>
-                                        <input type="password" name="password" id="password" class="w-full border border-gray-300 p-2 rounded" required>
+                                        <input type="text" name="password" id="password" class="w-full border border-gray-300 p-2 rounded" required>
                                 </div>
                                 <!-- Form buttons -->
                                 <div class="flex justify-end">
@@ -183,6 +188,7 @@ $users = $userManager->fetchUsers();
                                 document.getElementById('first_name').value = user.first_name;
                                 document.getElementById('last_name').value = user.last_name;
                                 document.getElementById('email').value = user.email;
+                                document.getElementById('phoneNumber').value = user.phone;
                                 document.getElementById('password').value = ''; // Leave password field empty for update
                         }
 

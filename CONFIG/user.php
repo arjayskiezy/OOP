@@ -43,11 +43,11 @@ class UserManager
         }
 
         // Function to update a user's details
-        public function updateUser($customerId, $firstName, $lastName, $email, $password)
+        public function updateUser($customerId, $firstName, $lastName, $email,  $phoneNumber, $password)
         {
-                $query = "UPDATE Customers SET first_name = ?, last_name = ?, email = ?, password = ? WHERE customer_id = ?";
+                $query = "UPDATE Customers SET first_name = ?, last_name = ?, email = ?,  phone = ?,password = ? WHERE customer_id = ?";
                 $stmt = $this->db->prepare($query);
-                $stmt->bind_param("ssssi", $firstName, $lastName, $email, $password, $customerId);
+                $stmt->bind_param("sssssi", $firstName, $lastName, $email, $phoneNumber, $password, $customerId);
 
                 if ($stmt->execute()) {
                         return true;
@@ -57,11 +57,11 @@ class UserManager
         }
 
         // Function to add a new user
-        public function addUser($firstName, $lastName, $email, $password)
+        public function addUser($firstName, $lastName, $email, $phoneNumber ,$password)
         {
-                $query = "INSERT INTO Customers (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+                $query = "INSERT INTO Customers (first_name, last_name, email,password,phone) VALUES (?, ?, ?, ?, ?)";
                 $stmt = $this->db->prepare($query);
-                $stmt->bind_param("ssss", $firstName, $lastName, $email, $password);
+                $stmt->bind_param("sssss", $firstName, $lastName, $email, $password, $phoneNumber);
 
                 if ($stmt->execute()) {
                         return true;

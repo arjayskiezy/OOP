@@ -1,6 +1,10 @@
 <?php
 session_start();
 include '../CONFIG/db_connect.php'; // Ensure this file sets up $conn for the database connection
+include '../CONFIG/user.php';
+
+$userManager = new UserManager();
+
 
 $db = new Database();
 $conn = $db->getConnection(); // Get the connection from the Database class
@@ -18,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $last_name = $conn->real_escape_string($_POST['last_name']);
     $email = $conn->real_escape_string($_POST['email']);
     $phoneNumber = $conn->real_escape_string($_POST['phoneNumber']);
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     // Simple server-side validation
     if (empty($first_name) || empty($last_name) || empty($email) || empty($phoneNumber) || empty($password)) {
@@ -39,16 +43,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result_check->num_rows > 0) {
             $error = "An account with this email already exists.";
         } else {
-            // Insert the new user into the database
-            $sql = "INSERT INTO Customers (first_name, last_name, email, phone, password) VALUES ('$first_name', '$last_name', '$email', '$phoneNumber', '$hashed_password')";
-            if ($conn->query($sql) === TRUE) {
+            if ($userManager->addUser($first_name, $last_name, $email, $phoneNumber ,$password)) {
                 $_SESSION['customer_logged_in'] = true;
                 $_SESSION['customer_name'] = $first_name . ' ' . $last_name;
-                header('Location: ../MAINPAGE/mainpage.php'); // Redirect to the homepage or login page after registration
+                header('Location: ../MAINPAGE/mainpage.php'); // Redirect to the homepage after registration
                 exit();
             } else {
                 $error = "Error creating account. Please try again.";
             }
+            // Insert the new user into the database
+            // $sql = "INSERT INTO Customers (first_name, last_name, email, phone, password) VALUES ('$first_name', '$last_name', '$email', '$phoneNumber', '$hashed_password')";
+            // if ($conn->query($sql) === TRUE) {
+            //     $_SESSION['customer_logged_in'] = true;
+            //     $_SESSION['customer_name'] = $first_name . ' ' . $last_name;
+            //     header('Location: ../MAINPAGE/mainpage.php'); // Redirect to the homepage or login page after registration
+            //     exit();
+            // } else {
+            //     $error = "Error creating account. Please try again.";
+            // }
         }
     }
 }
